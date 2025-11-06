@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapist Dashboard | Tulia</title>
+    <link rel="stylesheet" href="therapist_dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.462.0/lucide.min.css" rel="stylesheet">
+</head>
+<body data-page-title="therapistDashboard">
+    <div class="navbar">
+        <h1>Tulia</h1>
+        <div class="nav-links">
+            <a href="patient_records.html" data-translate="patientRecords">Patient Records</a>
+            <a href="therapist.html" data-translate="Therapy Connect">Therapy Connect</a>
+            <a href="chat_dashboard.html" data-translate="Chat">Chat</a>
+        </div>
+        <div class="user-section">
+            <div class="language-indicator">
+                <i data-lucide="globe"></i>
+                <span id="userLanguage">EN</span>
+            </div>
+            <span id="userName" data-translate="welcomeBackUser">Welcome</span>
+            <button class="logout-btn" onclick="logout()">
+                <i data-lucide="log-out"></i>
+                <span data-translate="logout">Logout</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="welcome-section">
+            <div class="welcome-card">
+                <div class="welcome-content">
+                    <h2><span data-translate="welcomeBackUser">Welcome back</span>, <span id="userFirstName">Therapist</span>! 👋</h2>
+                    <p data-translate="readyToHelp">Ready to help your patients on their mental wellness journey? Here's what you can do today.</p>
+                </div>
+                <div class="welcome-icon">
+                    <i data-lucide="stethoscope"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card" onclick="navigateTo('patient_records.html')">
+                <div class="feature-icon">
+                    <i data-lucide="users"></i>
+                </div>
+                <h3 data-translate="patientRecords">Patient Records</h3>
+                <p data-translate="recordsDesc">Manage and view your patients' information, progress, and treatment plans.</p>
+                <div class="feature-action">
+                    <span data-translate="viewRecords">View Records</span>
+                    <i data-lucide="arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="navigateTo('index.html')">
+                <div class="feature-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                <h3 data-translate="home">Home</h3>
+                <p data-translate="homeDesc">Return to the main application homepage to explore all features.</p>
+                <div class="feature-action">
+                    <span data-translate="goHome">Go Home</span>
+                    <i data-lucide="arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="navigateTo('about.html')">
+                <div class="feature-icon">
+                    <i data-lucide="info"></i>
+                </div>
+                <h3 data-translate="aboutUs">About Us</h3>
+                <p data-translate="aboutDesc">Learn more about Tulia and our mission to support mental wellness.</p>
+                <div class="feature-action">
+                    <span data-translate="learnMore">Learn More</span>
+                    <i data-lucide="arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="navigateTo('contactpage.html')">
+                <div class="feature-icon">
+                    <i data-lucide="phone"></i>
+                </div>
+                <h3 data-translate="contactSupport">Contact Support</h3>
+                <p data-translate="contactDesc">Get in touch with our support team for any questions or assistance you need.</p>
+                <div class="feature-action">
+                    <span data-translate="contactUs">Contact Us</span>
+                    <i data-lucide="arrow-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <h3 data-translate="quickActions">Quick Actions</h3>
+            <div class="action-buttons">
+                <button class="action-btn" onclick="navigateTo('patient_records.html')">
+                    <i data-lucide="user-plus"></i>
+                    <span data-translate="addNewPatient">Add New Patient</span>
+                </button>
+                <button class="action-btn" onclick="navigateTo('patient_records.html')">
+                    <i data-lucide="search"></i>
+                    <span data-translate="searchRecords">Search Records</span>
+                </button>
+                <button class="action-btn" onclick="navigateTo('contactpage.html')">
+                    <i data-lucide="message-circle"></i>
+                    <span data-translate="contactSupport">Contact Support</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="translations.js"></script>
+    <script src="therapist_dashboard.js"></script>
+    <script>
+        // Initialize language system
+        document.addEventListener('DOMContentLoaded', function() {
+            LanguageManager.init();
+        });
+    </script>
+</body>
+</html> 

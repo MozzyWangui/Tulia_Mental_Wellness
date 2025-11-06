@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mood Tracker | Tulia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.462.0/lucide.min.css " rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #fdf2f8, #fbc2eb);
+            color: #2d2d2d;
+            min-height: 100vh;
+        }
+        .navbar{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 15px 30px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar h1{
+            color: #ff2d92;
+            margin-right: 50px;
+            margin-bottom: 5px;
+        }
+        .nav-links a{
+            margin-left: 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        section {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 32px 20px 28px 20px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.10);
+            border: 1px solid rgba(236, 72, 153, 0.10);
+        }
+        h2 {
+            margin-top: 0;
+            color: #ec4899;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .mood-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .mood-button {
+            flex: 1 1 45%;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #ec4899;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #ec4899;
+            transition: all 0.3s ease;
+        }
+        .mood-button.selected {
+            background-color: #ec4899;
+            color: white;
+        }
+
+        /* Rating scale */
+        .rating-scale {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rating-scale label {
+            font-weight: 600;
+            color: #ec4899;
+        }
+        .rating-scale input[type="range"] {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        /* Note Input */
+        textarea {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            resize: vertical;
+        }
+
+        button.save-btn {
+            margin-top: 20px;
+            background: linear-gradient(to right, #f472b6, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button.save-btn:hover {
+            background: linear-gradient(to right, #ec4899, #db2777);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(236, 72, 153, 0.15);
+        }
+
+        /* Mood History */
+        .history-section {
+            margin-top: 40px;
+        }
+        .history-section h3 {
+            font-size: 1.4rem;
+            color: #ec4899;
+            margin-bottom: 10px;
+        }
+        .history-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mood-tag {
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Color classes for moods */
+        .calm { background: #bfdbfe; color: #0369a1; }
+        .energized { background: #bbf7d0; color: #16a34a; }
+        .hopeful { background: #c7ceff; color: #4f46e5; }
+        .low-energy { background: #fecdd3; color: #be185d; }
+        .gloomy { background: #e5e7eb; color: #4b5563; }
+        .triggered { background: #fca5a5; color: #991b1b; }
+        .obsessive-thoughts { background: #fcd34d; color: #92400e; }
+        .mood-swings { background: #fde68a; color: #ca8a04; }
+    </style>
+</head>
+<body data-page-title="patientDashboard">
+
+<!-- Header -->
+<header>
+    <div class="navbar">
+        <h1>Tulia</h1>
+         <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="journal.html">My Journal</a>
+            <a href="moodtracker.html">Mood Tracker</a>
+            <a href="therapist.html">Therapy Connect</a>
+            <a href="contactpage.html">Contact Us</a>
+         </div>
+    </div> 
+
+</header>
+
+<!-- Main Content -->
+<main>
+    <section>
+        <h2>Track Your Mood Today</h2>
+
+        <!-- Date -->
+        <p><strong>Date:</strong> <span id="currentDate"></span></p>
+
+        <!-- Emotional State Buttons -->
+        <div class="mood-buttons">
+            <button class="mood-button" data-mood="calm">Calm</button>
+            <button class="mood-button" data-mood="energized">Energized</button>
+            <button class="mood-button" data-mood="hopeful">Hopeful</button>
+            <button class="mood-button" data-mood="low energy">Low Energy</button>
+            <button class="mood-button" data-mood="gloomy">Gloomy</button>
+            <button class="mood-button" data-mood="triggered">Triggered</button>
+            <button class="mood-button" data-mood="obsessive thoughts">Obsessive Thoughts</button>
+            <button class="mood-button" data-mood="mood swings">Mood Swings</button>
+        </div>
+
+        <!-- Mood Intensity Scale -->
+        <div class="rating-scale">
+            <label for="moodRating">Intensity (1-5):</label>
+            <input type="range" id="moodRating" min="1" max="5" value="3">
+            <span id="ratingDisplay">3</span>/5
+        </div>
+
+        <!-- Optional Note -->
+        <textarea id="moodNote" rows="4" placeholder="Write about what you're feeling..."></textarea>
+
+        <!-- Save Button -->
+        <button class="save-btn" id="saveMoodBtn">Save My Mood</button>
+    </section>
+
+    <!-- Recent Moods Section -->
+    <section class="history-section">
+        <h3>📅 Recent Moods</h3>
+        <div id="moodHistoryList">
+            <!-- Mood history items will appear here -->
+            <p>No mood entries yet.</p>
+        </div>
+    </section>
+</main>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="moodtracker.js"></script>
+<script>
+// Remove inline selectMood and saveMood, wire up with JS
+// Mood button event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.mood-button').forEach(btn => {
+            btn.addEventListener('click', function() { selectMood(this); });
+        });
+        document.getElementById('saveMoodBtn').addEventListener('click', saveMood);
+    });
+</script>
+
+</body>
+</html>
